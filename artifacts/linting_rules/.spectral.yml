@@ -96,7 +96,7 @@ rules:
     message: "Sensitive data found in path: {{error}} Consider avoiding the use of Sesentive data "
     severity: warn
     description: |
-      This rule checks for sensitive data ('MSISDN' and 'IMSI') in API paths and suggests avoiding their use.
+      This rule checks for sensitive data ('MSISDN','IMSI' and 'phoneNumber') in API paths and suggests avoiding their use.
     given:
       - "$.paths"
     then:
@@ -115,7 +115,7 @@ rules:
     recommended: true  # Set to true/false to enable/disable this rule
 
   camara-get-no-request-body:
-    message: There must be no request body for Get and DELETE
+    message: There must be no request body for GET and DELETE
     severity: error
     given:
       - "$.paths.*.get"
@@ -143,7 +143,7 @@ rules:
     recommended: true  # Set to true/false to enable/disable this rule
 
   camara-routes-description:
-    message: "Functionality method description Warning: Each method should have description."
+    message: "Functionality method description Warning: Each method should have a description."
     severity: warn
     description: |
             This rule checks if each operation (POST, GET, DELETE, PUT, PATCH, OPTIONS) in your API specification has a description.
@@ -176,7 +176,7 @@ rules:
     message: "Parameter description is missing or empty: {{error}}"
     severity: warn
     description: |
-      This Spectral rule ensures that each responese object in the API specification has a descriptive and meaningful description.
+      This Spectral rule ensures that each response object in the API specification has a descriptive and meaningful description.
     given:
       - "$.paths..responses.*"
     then:
@@ -239,8 +239,8 @@ rules:
     recommended: true  # Set to true/false to enable/disable this rule
 
   camara-schema-casing-convention:
-    description: This rule checks schema should follow a specific case convention pascal case.
-    message: "{{property}} should be pascal case (UppperCamelCase)"
+    description: This rule checks that the schema should follow a specific case convention, Pascal case.
+    message: "{{property}} should be Pascal case (UppperCamelCase)"
     severity: warn
     given: $.components.schemas[*]~
     then:
