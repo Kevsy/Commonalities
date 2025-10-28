@@ -227,7 +227,7 @@ When IpAddr is used in a payload, the property `objectType` MUST be present to i
 An error response is defined with JSON structure with the following mandatory fields:
 - `status`, an HTTP response status code as defined in [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html)
 - `code`, a human-readable code which can be identified and traced for more details. The field/value causing the error may be included in the `message`.
-- `message` - a detailed description of the error.  English language in API specification, it can be changed to other languages in implementation if needed.
+- `message` - a detailed description of the error. These are provided in English in the API specification, the implementation may use other languages.
 
 `status` and `code` fields and values are normative (see [3.1. Standardized use of CAMARA error responses](#31-standardized-use-of-camara-error-responses)) and [CAMARA_common.yaml](../artifacts/CAMARA_common.yaml). `message` is informative and this document shows an example.
 
@@ -1274,5 +1274,6 @@ This approach simplifies API usage for API consumers using a three-legged access
 
 - If the subject can be identified from the access token and the optional [`device` object | `phoneNumber` field](*) is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same [ device | phone number ](*) is identified by these two methods, as the server is unable to make this comparison.
 ```
+
 
 
