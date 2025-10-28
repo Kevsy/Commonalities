@@ -224,19 +224,15 @@ When IpAddr is used in a payload, the property `objectType` MUST be present to i
 
 ## 3. Error Responses
 
-To ensure interoperability, it is crucial to implement error management that strictly adheres to the error codes defined in the HTTP protocol.
+An error response is defined with JSON structure with the following mandatory fields:
+- `status`, an HTTP response status code as defined in [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html)
+- `code`, a human-readable code which can be identified and traced for more details. The field/value causing the error may be included in the `message`.
+- `message` - a detailed description of the error.  English language in API specification, it can be changed to other languages in implementation if needed.
 
-An error representation MUST NOT differ from the representation of any resource. A main error message is defined with JSON structure with the following fields:
-- A field `status`, which can be identified in the response as a standard code from a list of Hypertext Transfer Protocol (HTTP) response status codes.
-- A unique error `code`, which can be identified and traced for more details. It MUST be human-readable; therefore, it MUST NOT be a numeric code. In turn, to achieve a better location of the error, you can reference the value or the field causing it, and include it in the message.
-- A detailed description in `message` - in English language in API specification, it can be changed to other languages in implementation if needed.
+`status` and `code` fields and values are normative (see [3.1. Standardized use of CAMARA error responses](#31-standardized-use-of-camara-error-responses)) and [CAMARA_common.yaml](../artifacts/CAMARA_common.yaml). `message` is informative and this document shows an example.
 
-All these aforementioned fields are mandatory in Error Responses.
-`status` and `code` fields have normative nature, so as their use has to be standardized (see [3.1. Standardized use of CAMARA error responses](#31-standardized-use-of-camara-error-responses)). On the other hand, `message` is informative and within this document an example is shown.
 
-The values of the `status` and `code` fields are normative (i.e. they have a set of allowed values), as defined in [CAMARA_common.yaml](../artifacts/CAMARA_common.yaml).
-
-An example of JSON error structure is as follows:
+An example of JSON error structure is:
 
 ```json
 {
@@ -1278,4 +1274,5 @@ This approach simplifies API usage for API consumers using a three-legged access
 
 - If the subject can be identified from the access token and the optional [`device` object | `phoneNumber` field](*) is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same [ device | phone number ](*) is identified by these two methods, as the server is unable to make this comparison.
 ```
+
 
